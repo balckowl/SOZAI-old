@@ -22,20 +22,20 @@ const SozaiDetail = async ({ params }: { params: { slug: string } }) => {
     return (
         <div>
             {/* <p>{slug}</p> */}
-            <div className="container mx-auto py-[35px]">
+            <div className="container mx-auto py-[35px] px-[15px]">
                 <h2 className="text-[30px] font-bold mb-[10px]">{SozaiDetail.name}</h2>
                 <div className="mb-[30px] flex items-center gap-3">
                     <CategoryList contents={SozaiDetail.category} />
                     <TagList contents={SozaiDetail.tags} />
                 </div>
-                <div className="grid grid-cols-2 grid-rows-4 gap-5">
+                <div className="grid md:grid-cols-2 grid-rows-4 gap-5">
                     <div className="col-span-1 row-span-4 p-[30px] border-2 rounded-xl">
                         <Image src={SozaiDetail.material.url} width={500} height={500} alt="" className="w-full" />
                     </div>
-                    <div className="col-span-1 row-span-3 bg-[#eee] flex justify-center items-center">
-                        <p className="text-[50px]">Adsense</p>
+                    <div className="col-span-1 row-span-2 xl:row-span-3 bg-[#eee] flex justify-center items-center h-[300px] md:h-full">
+                        <p className="xl:text-[50px]">Adsense</p>
                     </div>
-                    <div className="col-span-1 row-span-1 flex items-center justify-center gap-3">
+                    <div className="col-span-1 row-span-2 xl:row-span-1 flex-col xl:flex-row flex items-center justify-center gap-3">
                         <button className="bg-black text-white py-[14px] px-[90px] rounded-sm flex gap-2 items-center">
                             <Download width={18} height={18} />
                             <p className="text-[15px]">PNG</p>

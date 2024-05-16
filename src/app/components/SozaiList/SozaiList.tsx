@@ -17,23 +17,25 @@ const SozaiList = (
 
     return (
         <div className="bg-[#eee]">
-            <div className="container mx-auto py-[100px]">
-                <h2 className="font-bold text-[25px] mb-[10px]">{title}</h2>
-                <div className="grid grid-cols-3 gap-[100px]">
+            <div className="container mx-auto py-[50px] md:py-[100px] px-[15px]">
+                <h2 className="font-bold text-[20px] md:text-[25px] mb-[10px]">{title}</h2>
+                <div className="grid grid-cols-2 lg:grid-cols-3  gap-[10px] md:gap-[100px]">
                     {contents.map((sozai: any) => (
                         <SozaiCard src={sozai.material.url} name={sozai.name} href={sozai.id} />
                     ))}
                 </div>
             </div>
 
-            {isHome && <div className="flex justify-center pb-[100px]">
-                <Link href="/all-sozai">
-                    <button className="bg-black text-white py-[20px] px-[70px] rounded-md flex items-center gap-2">
-                        <p>すべてのイラストを見る</p>
-                        <ArrowRight />
-                    </button>
-                </Link>
-            </div>}
+            <div className="container mx-auto px-[15px]">
+                {isHome && <div className="flex justify-center pb-[100px]">
+                    <Link href="/all-sozai">
+                        <button className="bg-black text-white py-[20px] px-[60px] rounded-md flex items-center gap-2">
+                            <p className="text-[13px]">すべてのイラストを見る</p>
+                            <ArrowRight width={18} height={18}/>
+                        </button>
+                    </Link>
+                </div>}
+            </div>
 
             {/* {!isHome && <div className="flex justify-center items-center pb-[100px] gap-3">
                 {currentPage > 1 && (
@@ -53,7 +55,7 @@ const SozaiList = (
                 )}
             </div>} */}
 
-            {!isHome && <Pagination totalCount={totalCount} currentPage={currentPage} limit={limit}/>}
+            {!isHome && <Pagination totalCount={totalCount} currentPage={currentPage} limit={limit} />}
         </div>
     )
 }
