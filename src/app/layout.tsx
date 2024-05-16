@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { UIProvider } from "@yamada-ui/react";
+import Header from "@/app/components/Header/Headar"
+import Footer from "./components/Footer/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,9 +21,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <UIProvider>
+          <Header />
           <main>
             {children}
           </main>
+          <Footer />
         </UIProvider>
       </body>
     </html>

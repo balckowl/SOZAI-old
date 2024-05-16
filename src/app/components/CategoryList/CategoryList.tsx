@@ -11,7 +11,7 @@ const CategoryList = ({contents}:{contents:any}) => {
     return (
         <div className="flex gap-3 flex-wrap">
             {contents?.map((category:any) => (
-                <Category name={category.name} src={category.image.url} href={category.engname} />
+                <Category name={category.name} src={category.image.url} href={category.id} />
             ))}
         </div>
     )

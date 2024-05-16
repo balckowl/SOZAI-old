@@ -4,7 +4,6 @@ import { getCategoryList } from "@/libs/microcms"
 
 const Hero = async () => {
     const Categories = await getCategoryList()
-    console.log(Categories)
     return (
         <div className="h-[calc(100vh-80px)]">
             <Image src="/images/hero.png" width={1000} height={500} alt="" className="w-full h-[70%] object-cover" />

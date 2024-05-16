@@ -11,7 +11,7 @@ const TagList = ({contents}:{contents:any}) => {
     return (
         <div className="flex gap-3 flex-wrap">
             {contents?.map((tag:any) => (
-                <Tags name={tag.name} href={tag.engname} />
+                <Tags name={tag.name} href={tag.id} />
             ))}
         </div>
     )

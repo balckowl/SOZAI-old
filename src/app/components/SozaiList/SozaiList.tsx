@@ -1,6 +1,12 @@
+import { ArrowLeft, ArrowRight } from "lucide-react"
 import SozaiCard from "../SozaiCard/SozaiCard"
+import Link from "next/link"
+import Pagination from "../Pagination/Pagination"
 
-const SozaiList = ({ title, contents }: { title: string, contents:any }) => {
+const SozaiList = (
+    { title, contents, isHome = false, currentPage, totalCount, limit }:
+        { title: string, contents: any, isHome?: boolean, currentPage: number, totalCount: number, limit: number }
+) => {
 
     const Sozaies = [
         { src: "/images/free/cat.png", name: "こっちをじっと見つめる黒猫", href: "/sozai/111" },
@@ -14,11 +20,40 @@ const SozaiList = ({ title, contents }: { title: string, contents:any }) => {
             <div className="container mx-auto py-[100px]">
                 <h2 className="font-bold text-[25px] mb-[10px]">{title}</h2>
                 <div className="grid grid-cols-3 gap-[100px]">
-                    {contents.map((sozai:any) => (
+                    {contents.map((sozai: any) => (
                         <SozaiCard src={sozai.material.url} name={sozai.name} href={sozai.id} />
                     ))}
                 </div>
             </div>
+
+            {isHome && <div className="flex justify-center pb-[100px]">
+                <Link href="/all-sozai">
+                    <button className="bg-black text-white py-[20px] px-[70px] rounded-md flex items-center gap-2">
+                        <p>すべてのイラストを見る</p>
+                        <ArrowRight />
+                    </button>
+                </Link>
+            </div>}
+
+            {/* {!isHome && <div className="flex justify-center items-center pb-[100px] gap-3">
+                {currentPage > 1 && (
+                    <Link href={`?page=${currentPage - 1}`}>
+                        <button className="bg-black text-white w-[50px] h-[50px] rounded-md flex justify-center items-center gap-2">
+                            <ArrowLeft />
+                        </button>
+                    </Link>
+                )}
+                <div>{currentPage}/{totalPages}</div>
+                {currentPage < totalPages && (
+                    <Link href={`?page=${currentPage + 1}`}>
+                        <button className="bg-black text-white w-[50px] h-[50px] rounded-md flex justify-center items-center gap-2">
+                            <ArrowRight />
+                        </button>
+                    </Link>
+                )}
+            </div>} */}
+
+            {!isHome && <Pagination totalCount={totalCount} currentPage={currentPage} limit={limit}/>}
         </div>
     )
 }

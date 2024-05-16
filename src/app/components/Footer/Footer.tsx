@@ -5,7 +5,7 @@ import TagList from "../TagList/TagList"
 const Footer = async () => {
     const Categories = await getCategoryList()
     const Tags = await getTagList()
-    console.log(Tags)
+
     return (
         <div>
             <div className="container mx-auto py-[100px]">
