@@ -8,7 +8,7 @@ const Hero = async () => {
         <div className="h-[calc(100vh-80px)]">
             <Image src="/images/hero.png" width={1000} height={500} alt="" className="w-full h-[70%] object-cover" />
             <div className="h-[30%]">
-                <div className="container mx-auto h-full flex items-center">
+                <div className="container mx-auto h-full flex items-center px-[15px]">
                     <CategoryList contents={Categories.contents}/>
                 </div>
             </div>

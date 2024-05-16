@@ -35,10 +35,10 @@ const Pagination = ({ totalCount, currentPage, limit }: { totalCount: number, cu
     const pageNumbers = generatePageNumbers()
 
     return (
-        <div className="flex justify-center items-center pb-[100px] gap-3">
+        <div className="flex justify-center items-center pb-[50px] md:pb-[100px] gap-3">
             {currentPage > 1 && (
                 <Link href={`?page=${currentPage - 1}`}>
-                    <button className="bg-black text-white w-[50px] h-[50px] rounded-md flex justify-center items-center gap-2">
+                    <button className="bg-black text-white w-[40px] h-[40px] md:w-[50px] md:h-[50px] rounded-md flex justify-center items-center gap-2">
                         <ArrowLeft />
                     </button>
                 </Link>
@@ -51,7 +51,7 @@ const Pagination = ({ totalCount, currentPage, limit }: { totalCount: number, cu
                 ) : (
                     <Link href={`?page=${page}`} key={index}>
                         <button
-                            className={`w-[50px] h-[50px] rounded-md flex justify-center items-center ${page === currentPage ? 'bg-gray-700 text-white' : 'bg-black text-white'
+                            className={`w-[40px] h-[40px] md:w-[50px] md:h-[50px] rounded-md flex justify-center items-center ${page === currentPage ? 'bg-gray-700 text-white' : 'bg-black text-white'
                                 }`}
                         >
                             {page}
@@ -61,7 +61,7 @@ const Pagination = ({ totalCount, currentPage, limit }: { totalCount: number, cu
             )}
             {currentPage < totalPages && (
                 <Link href={`?page=${currentPage + 1}`}>
-                    <button className="bg-black text-white w-[50px] h-[50px] rounded-md flex justify-center items-center gap-2">
+                    <button className="bg-black text-white w-[40px] h-[40px] md:w-[50px] md:h-[50px] rounded-md flex justify-center items-center gap-2">
                         <ArrowRight />
                     </button>
                 </Link>

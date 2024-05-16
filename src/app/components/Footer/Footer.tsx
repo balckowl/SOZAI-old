@@ -8,8 +8,8 @@ const Footer = async () => {
 
     return (
         <div>
-            <div className="container mx-auto py-[100px]">
-                <h2 className="font-bold text-[25px] mb-[30px]">キーワードから探す</h2>
+            <div className="container mx-auto py-[50px] md:py-[100px] px-[15px]">
+                <h2 className="font-bold text-[20px] md:text-[25px] mb-[30px]">キーワードから探す</h2>
                 <div className="mb-[30px]">
                     <CategorList contents={Categories.contents}/>
                 </div>
