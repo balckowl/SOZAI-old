@@ -7,7 +7,7 @@ const Footer = async () => {
     const Tags = await getTagList()
 
     return (
-        <div>
+        <div id="footer">
             <div className="container mx-auto py-[50px] md:py-[100px] px-[15px]">
                 <h2 className="font-bold text-[20px] md:text-[25px] mb-[30px]">キーワードから探す</h2>
                 <div className="mb-[30px]">

@@ -1,5 +1,5 @@
 import SozaiList from "@/app/components/SozaiList/SozaiList"
-import { getList } from "@/libs/microcms"
+import { getList, getTagList } from "@/libs/microcms"
 
 const TagDetail = async ({ params, searchParams }: { params: { slug: string }, searchParams: { page: string } }) => {
 
@@ -8,10 +8,11 @@ const TagDetail = async ({ params, searchParams }: { params: { slug: string }, s
     const page = searchParams.page ? parseInt(searchParams.page, 10) : 1;
     const limit = 3; // 1ページあたりのアイテム数
     const offset = (page - 1) * limit;
-    const tags = await getList({ filters: `tags[contains]${slug}`, limit, offset })
+    const Sozaies = await getList({ filters: `tags[contains]${slug}`, limit, offset })
+    const Tags = await getTagList({filters: `id[equals]${slug}`})
 
     return (
-        <SozaiList title={slug} contents={tags.contents} currentPage={page} totalCount={tags.totalCount} limit={limit} />
+        <SozaiList title={Tags.contents[0].name} contents={Sozaies.contents} currentPage={page} totalCount={Sozaies.totalCount} limit={limit} />
     )
 }
 
