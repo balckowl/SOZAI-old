@@ -1,4 +1,4 @@
-import { ArrowLeft, ArrowRight } from "lucide-react"
+import { ArrowLeft, ArrowRight, Tag } from "lucide-react"
 import SozaiCard from "../SozaiCard/SozaiCard"
 import Link from "next/link"
 import Pagination from "../Pagination/Pagination"
@@ -18,7 +18,10 @@ const SozaiList = (
     return (
         <div className="bg-[#eee]">
             <div className="container mx-auto py-[50px] md:py-[100px] px-[15px]">
-                <h2 className="font-bold text-[20px] md:text-[25px] mb-[10px]">{title}</h2>
+                <h2 className="font-bold text-[20px] md:text-[25px] mb-[10px] flex items-center gap-2">
+                    <Tag />
+                    <p>{title}</p>
+                </h2>
                 <div className="grid grid-cols-2 lg:grid-cols-3  gap-[10px] md:gap-[100px]">
                     {contents.map((sozai: any) => (
                         <SozaiCard src={sozai.material.url} name={sozai.name} href={sozai.id} />
@@ -31,7 +34,7 @@ const SozaiList = (
                     <Link href="/all-sozai">
                         <button className="bg-black text-white py-[20px] px-[60px] rounded-md flex items-center gap-2">
                             <p className="text-[13px]">すべてのイラストを見る</p>
-                            <ArrowRight width={18} height={18}/>
+                            <ArrowRight width={18} height={18} />
                         </button>
                     </Link>
                 </div>}

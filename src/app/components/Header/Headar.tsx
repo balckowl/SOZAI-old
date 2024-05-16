@@ -7,8 +7,27 @@ const Headar = () => {
                 <Link href="/">
                     <h1 className="text-[30px] text-bold font-bold">SOZ<span className="text-red-300">AI</span></h1>
                 </Link>
-                <ul>
-                    <li>カテゴリー</li>
+                <ul className="md:flex items-center gap-4 hidden">
+                    <li>
+                        <Link href="/all-sozai">
+                            全ての素材
+                        </Link>
+                    </li>
+                    <li>
+                        <Link href="#footer">
+                            カテゴリー
+                        </Link>
+                    </li>
+                    <li>
+                        <Link href="/favorites">
+                            お気に入り
+                        </Link>
+                    </li>
+                    <li>
+                        <Link href="/tag/original">
+                            オリジナル素材
+                        </Link>
+                    </li>
                 </ul>
             </div>
         </div>
