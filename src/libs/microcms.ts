@@ -46,11 +46,11 @@ export const client = createClient({
 // 素材一覧を取得
 export const getList = async (queries?: MicroCMSQueries) => {
     const listData = await client.getList<Sozai>({
-        customRequestInit: {
-            next: {
-                revalidate: 0,
-            },
-        },
+        // customRequestInit: {
+        //     next: {
+        //         revalidate: 0,
+        //     },
+        // },
         endpoint: "materials",
         queries,
     });
@@ -61,11 +61,11 @@ export const getList = async (queries?: MicroCMSQueries) => {
 //カテゴリ一覧を取得
 export const getCategoryList = async (queries?: MicroCMSQueries) => {
     const listData = await client.getList<Category>({
-        customRequestInit: {
-            next: {
-                revalidate: 0,
-            },
-        },
+        // customRequestInit: {
+        //     next: {
+        //         revalidate: 0,
+        //     },
+        // },
         endpoint: "categories",
         queries,
     });
@@ -76,11 +76,11 @@ export const getCategoryList = async (queries?: MicroCMSQueries) => {
 //タグ一覧を取得
 export const getTagList = async (queries?: MicroCMSQueries) => {
     const listData = await client.getList<Tag>({
-        customRequestInit: {
-            next: {
-                revalidate: 0,
-            },
-        },
+        // customRequestInit: {
+        //     next: {
+        //         revalidate: 0,
+        //     },
+        // },
         endpoint: "tags",
         queries,
     });
@@ -94,11 +94,11 @@ export const getSozaiDetail = async (
     queries?: MicroCMSQueries
 ) => {
     const detailData = await client.getListDetail<Sozai>({
-        customRequestInit: {
-            next: {
-                revalidate: 0,
-            },
-        },
+        // customRequestInit: {
+        //     next: {
+        //         revalidate: 0,
+        //     },
+        // },
         endpoint: "materials",
         contentId,
         queries,

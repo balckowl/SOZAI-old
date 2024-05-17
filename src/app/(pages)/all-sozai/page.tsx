@@ -30,8 +30,6 @@ const AllSozai = async ({ searchParams }: { searchParams: { page: string } }) =>
     const offset = (page - 1) * limit;
     const Sozaies = await getList({limit, offset})
 
-    console.log(searchParams.page)
-
     return (
         <div>
             <SozaiList title="SOZAI一覧" contents={Sozaies.contents} />
