@@ -37,11 +37,9 @@ export async function generateStaticParams() {
 
     const Sozaies = await getList()
 
-    const paths =  Sozaies.contents.map((sozai) => ({
-        params: { slug: sozai.id }
+    return Sozaies.contents.map((sozai) => ({
+        slug: sozai.id 
     }))
-
-    return { paths, fallback: 'blocking' }
 }
 
 const SozaiDetail = async ({ params }: { params: { slug: string } }) => {
