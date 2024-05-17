@@ -32,13 +32,13 @@ export const generateMetadata = async ({ params }: { params: { slug: string } })
 //ssgの設定
 export const dynamicParams = false
 
-export async function generateStaticParams(){
- 
+export async function generateStaticParams() {
+
     const res = await getCategoryList();
     const Categories = res.contents;
 
-    const paths = Categories.map((category) => ({
-        params: { slug: category.id },
+    const paths = Categories.map(category => ({
+        params: { slug: category.id }
     }));
 
     return { paths, fallback: 'blocking' }
