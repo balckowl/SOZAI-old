@@ -33,12 +33,9 @@ export const generateMetadata = async ({ params }: { params: { slug: string } })
 //ssgの設定
 export const dynamicParams = false
 
-export async function generateStaticParams({ searchParams }: { searchParams: { page: string } }){
-
-    const page = searchParams.page ? parseInt(searchParams.page, 10) : 1;
-    const limit = 9;
-    const offset = (page - 1) * limit;
-    const Sozaies = await getList({ limit, offset })
+export async function generateStaticParams(){
+    
+    const Sozaies = await getList()
 
     return Sozaies.contents.map((sozai) => ({
         slug: sozai.id
