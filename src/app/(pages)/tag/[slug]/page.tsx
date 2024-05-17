@@ -31,17 +31,15 @@ export const generateMetadata = async ({ params }: { params: { slug: string } })
 //ssgの設定
 export const dynamicParams = false
 
-export async function generateStaticParams({ searchParams }: { searchParams: { page: string } }){
- 
-    const page = searchParams.page ? parseInt(searchParams.page, 10) : 1;
-    const limit = 9;
-    const offset = (page - 1) * limit;
+export async function generateStaticParams(){
+    const res = await getTagList();
+    const tags = res.contents;
 
-    const Tags = await getTagList({ limit, offset })
+    const paths = tags.map((tag) => ({
+        params: { slug: tag.id },
+    }));
 
-    return Tags.contents.map((tag) => ({
-        slug: tag.id
-    }))
+    return { paths, fallback: 'blocking' }
 }
 
 const TagDetail = async ({ params, searchParams }: { params: { slug: string }, searchParams: { page: string } }) => {
