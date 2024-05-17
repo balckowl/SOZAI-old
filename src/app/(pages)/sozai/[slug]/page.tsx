@@ -1,10 +1,10 @@
 import CategoryList from "@/app/components/CategoryList/CategoryList"
 import DownloadBtn from "@/app/components/DownloadBtn/DownloadBtn"
 import SozaiHeader from "@/app/components/SozaiHeader/SozaiHeader"
-import { getSozaiDetail } from "@/libs/microcms"
+import { getList, getSozaiDetail } from "@/libs/microcms"
 import Image from "next/image"
 
-export const generateMetadata = async ({ params }: { params: {slug: string}}) => {
+export const generateMetadata = async ({ params }: { params: { slug: string } }) => {
 
     const { slug } = params
     const SozaiDetail = await getSozaiDetail(slug)
@@ -28,6 +28,21 @@ export const generateMetadata = async ({ params }: { params: {slug: string}}) =>
             type: 'article',
         }
     }
+}
+
+//ssgの設定
+export const dynamicParams = false
+
+export const generateStaticParams = async ({ params, searchParams }: { params: { slug: string }, searchParams: { page: string } }) => {
+    const { slug } = params
+    const page = searchParams.page ? parseInt(searchParams.page, 10) : 1;
+    const limit = 9;
+    const offset = (page - 1) * limit;
+    const Sozaies = await getList({ limit, offset })
+
+    return Sozaies.contents.map((sozai) => ({
+        slug: sozai.id
+    }))
 }
 
 const SozaiDetail = async ({ params }: { params: { slug: string } }) => {
@@ -57,7 +72,7 @@ const SozaiDetail = async ({ params }: { params: { slug: string } }) => {
                     <div className="col-span-1 row-span-3 bg-[#eee] flex justify-center items-center h-[300px] lg:h-full">
                         <p className="xl:text-[50px]">Adsense</p>
                     </div>
-                    <DownloadBtn url={SozaiDetail.material.url} name={SozaiDetail.name}/>
+                    <DownloadBtn url={SozaiDetail.material.url} name={SozaiDetail.name} />
                 </div>
             </div>
         </div>

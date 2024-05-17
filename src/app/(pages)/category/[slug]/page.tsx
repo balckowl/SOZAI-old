@@ -2,7 +2,7 @@ import Pagination from "@/app/components/Pagination/Pagination";
 import SozaiList from "@/app/components/SozaiList/SozaiList"
 import { getCategoryList, getList } from "@/libs/microcms"
 
-export const generateMetadata = async ({ params }: { params: {slug: string}}) => {
+export const generateMetadata = async ({ params }: { params: { slug: string } }) => {
 
     const { slug } = params
     const Category = await getCategoryList({ filters: `id[equals]${slug}` })
@@ -26,6 +26,22 @@ export const generateMetadata = async ({ params }: { params: {slug: string}}) =>
             type: 'article',
         }
     }
+}
+
+//ssgの設定
+//ssgの設定
+export const dynamicParams = false
+
+export const generateStaticParams = async ({ searchParams }: { searchParams: { page: string } }) => {
+ 
+    const page = searchParams.page ? parseInt(searchParams.page, 10) : 1;
+    const limit = 9;
+    const offset = (page - 1) * limit;
+    const Categories = await getCategoryList({ limit, offset })
+
+    return Categories.contents.map((category) => ({
+        slug: category.id
+    }))
 }
 
 const CategoryDetail = async ({ params, searchParams }: { params: { slug: string }, searchParams: { page: string } }) => {
