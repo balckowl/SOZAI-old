@@ -1,4 +1,5 @@
 import Hero from "./components/Hero/Hero";
+import MoreSozaiBtn from "./components/MoreSozaiBtn/MoreSozaiBtn";
 import SozaiList from "./components/SozaiList/SozaiList";
 import { getList } from "@/libs/microcms";
 
@@ -9,7 +10,8 @@ export default async function Home() {
   return (
     <>
       <Hero />
-      <SozaiList title="新しいイラスト" contents={Sozaies.contents} isHome={true} totalCount={10} currentPage={10} limit={10} />
+      <SozaiList title="新しいSOZAI" contents={Sozaies.contents} isHome={true}/>
+      <MoreSozaiBtn />
     </>
   );
 }

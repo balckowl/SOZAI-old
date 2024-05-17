@@ -1,7 +1,7 @@
 import CategoryList from "@/app/components/CategoryList/CategoryList"
-import TagList from "@/app/components/TagList/TagList"
+import DownloadBtn from "@/app/components/DownloadBtn/DownloadBtn"
+import SozaiHeader from "@/app/components/SozaiHeader/SozaiHeader"
 import { getSozaiDetail } from "@/libs/microcms"
-import { Download } from "lucide-react"
 import Image from "next/image"
 
 const SozaiDetail = async ({ params }: { params: { slug: string } }) => {
@@ -23,28 +23,15 @@ const SozaiDetail = async ({ params }: { params: { slug: string } }) => {
         <div>
             {/* <p>{slug}</p> */}
             <div className="container mx-auto py-[35px] px-[15px]">
-                <h2 className="text-[30px] font-bold mb-[10px]">{SozaiDetail.name}</h2>
-                <div className="mb-[30px] flex items-center gap-3">
-                    <CategoryList contents={SozaiDetail.category} />
-                    <TagList contents={SozaiDetail.tags} />
-                </div>
-                <div className="grid md:grid-cols-2 grid-rows-4 gap-5">
+                <SozaiHeader name={SozaiDetail.name} category={SozaiDetail.category} tags={SozaiDetail.tags} id={SozaiDetail.id} />
+                <div className="grid lg:grid-cols-2 grid-rows-4 gap-5">
                     <div className="col-span-1 row-span-4 p-[30px] border-2 rounded-xl">
-                        <Image src={SozaiDetail.material.url} width={500} height={500} alt="" className="w-full" />
+                        <Image src={SozaiDetail.material.url} width={700} height={700} alt="" className="w-full" />
                     </div>
-                    <div className="col-span-1 row-span-2 xl:row-span-3 bg-[#eee] flex justify-center items-center h-[300px] md:h-full">
+                    <div className="col-span-1 row-span-3 bg-[#eee] flex justify-center items-center h-[300px] lg:h-full">
                         <p className="xl:text-[50px]">Adsense</p>
                     </div>
-                    <div className="col-span-1 row-span-2 xl:row-span-1 flex-col xl:flex-row flex items-center justify-center gap-3">
-                        <button className="bg-black text-white py-[14px] px-[90px] rounded-sm flex gap-2 items-center">
-                            <Download width={18} height={18} />
-                            <p className="text-[15px]">PNG</p>
-                        </button>
-                        <button className="bg-black text-white py-[14px] px-[90px] rounded-sm flex gap-2 items-center">
-                            <Download width={18} height={18} />
-                            <p className="text-[15px]">JPG</p>
-                        </button>
-                    </div>
+                    <DownloadBtn url={SozaiDetail.material.url} name={SozaiDetail.name}/>
                 </div>
             </div>
         </div>
