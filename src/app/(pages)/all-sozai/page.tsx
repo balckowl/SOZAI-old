@@ -7,7 +7,7 @@ export const metadata: Metadata= {
     title: 'SOZAI | SOZAI一覧',
     description: 'AIで作ったフリー素材。どんな場面でも合わせやすい素材。PNG、JPG、WEBP、SVG形式でのダウンロードが可能。',
     openGraph: {
-      title: 'SOZAI',
+      title: 'SOZAI | SOZAI一覧',
       description: 'AIで作ったフリー素材。どんな場面でも合わせやすい素材。PNG、JPG、WEBP、SVG形式でのダウンロードが可能。',
       url: `${process.env.NEXT_PUBLIC_SITE_URL}/all-sozai`,
       siteName: 'SOZAI',
