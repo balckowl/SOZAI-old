@@ -1,6 +1,6 @@
 import Pagination from "@/app/components/Pagination/Pagination";
 import SozaiList from "@/app/components/SozaiList/SozaiList"
-import { getCategoryList, getList } from "@/libs/microcms"
+import { Category, getCategoryList, getList } from "@/libs/microcms"
 
 export const generateMetadata = async ({ params }: { params: { slug: string } }) => {
 
@@ -34,12 +34,22 @@ export const dynamicParams = false
 
 export async function generateStaticParams() {
 
-    const res = await getCategoryList();
-    const Categories = res.contents;
+    let offset = 0;
+    const limit = 10;  // microCMSからの取得上限
+    let allCategories: Category[] = [];
+    let totalCount = 0;
 
-    return Categories.map(category => ({
+    do {
+        const response = await getCategoryList({ limit: limit, offset: offset });
+        allCategories = allCategories.concat(response.contents);
+        totalCount = response.totalCount; // 総アイテム数を更新
+        offset += limit; // 次のページへのオフセットを更新
+    } while (allCategories.length < totalCount)
+
+    return allCategories.map(category => ({
         slug: category.id
-    }));
+    }))
+
 }
 
 const CategoryDetail = async ({ params, searchParams }: { params: { slug: string }, searchParams: { page: string } }) => {
