@@ -33,13 +33,15 @@ export const generateMetadata = async ({ params }: { params: { slug: string } })
 //ssgの設定
 export const dynamicParams = false
 
-export async function generateStaticParams(){
-    
+export async function generateStaticParams() {
+
     const Sozaies = await getList()
 
-    return Sozaies.contents.map((sozai) => ({
-        slug: sozai.id
+    const paths =  Sozaies.contents.map((sozai) => ({
+        params: { slug: sozai.id }
     }))
+
+    return { paths, fallback: 'blocking' }
 }
 
 const SozaiDetail = async ({ params }: { params: { slug: string } }) => {
