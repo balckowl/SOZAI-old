@@ -1,7 +1,32 @@
 import Pagination from "@/app/components/Pagination/Pagination";
 import SozaiList from "@/app/components/SozaiList/SozaiList"
 import { getCategoryList, getList } from "@/libs/microcms"
-import { redirect } from "next/navigation";
+
+export const generateMetadata = async ({ params }: { params: {slug: string}}) => {
+
+    const { slug } = params
+    const Category = await getCategoryList({ filters: `id[equals]${slug}` })
+
+    return {
+        title: `SOZAI | カテゴリー「${Category.contents[0]?.name}」`,
+        description: 'AIで作ったフリー素材。どんな場面でも合わせやすい素材。PNG、JPG、WEBP、SVG形式でのダウンロードが可能。',
+        openGraph: {
+            title: 'SOZAI',
+            description: 'AIで作ったフリー素材。どんな場面でも合わせやすい素材。PNG、JPG、WEBP、SVG形式でのダウンロードが可能。',
+            url: `${process.env.NEXT_PUBLIC_SITE_URL}/category/${Category.contents[0]?.id}`,
+            siteName: 'SOZAI',
+            images: [
+                {
+                    width: '1200',
+                    height: '630',
+                    url: `${process.env.NEXT_PUBLIC_SITE_URL}/images/ogp/home-ogp.png`
+                }
+            ],
+            locale: 'jp',
+            type: 'article',
+        }
+    }
+}
 
 const CategoryDetail = async ({ params, searchParams }: { params: { slug: string }, searchParams: { page: string } }) => {
 
