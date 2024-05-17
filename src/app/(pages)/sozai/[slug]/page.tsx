@@ -1,7 +1,7 @@
 import CategoryList from "@/app/components/CategoryList/CategoryList"
 import DownloadBtn from "@/app/components/DownloadBtn/DownloadBtn"
 import SozaiHeader from "@/app/components/SozaiHeader/SozaiHeader"
-import { getList, getSozaiDetail } from "@/libs/microcms"
+import { Sozai, getList, getSozaiDetail } from "@/libs/microcms"
 import Image from "next/image"
 
 export const generateMetadata = async ({ params }: { params: { slug: string } }) => {
@@ -35,10 +35,20 @@ export const dynamicParams = false
 
 export async function generateStaticParams() {
 
-    const Sozaies = await getList()
+    let offset = 0;
+    const limit = 10;
+    let allSozaies: Sozai[] = []
+    let totalCount = 0;
 
-    return Sozaies.contents.map((sozai) => ({
-        slug: sozai.id 
+    do {
+        const response = await getList({ limit: limit, offset: offset });
+        allSozaies = allSozaies.concat(response.contents)
+        totalCount = response.totalCount;
+        offset += limit;
+    } while (allSozaies.length < totalCount)
+
+    return allSozaies.map(sozai => ({
+        slug: sozai.id
     }))
 }
 

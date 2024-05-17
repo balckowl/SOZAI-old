@@ -46,11 +46,6 @@ export const client = createClient({
 // 素材一覧を取得
 export const getList = async (queries?: MicroCMSQueries) => {
     const listData = await client.getList<Sozai>({
-        // customRequestInit: {
-        //     next: {
-        //         revalidate: 0,
-        //     },
-        // },
         endpoint: "materials",
         queries,
     });
