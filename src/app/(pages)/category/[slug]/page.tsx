@@ -37,11 +37,9 @@ export async function generateStaticParams() {
     const res = await getCategoryList();
     const Categories = res.contents;
 
-    const paths = Categories.map(category => ({
-        params: { slug: category.id }
+    return Categories.map(category => ({
+        slug: category.id
     }));
-
-    return { paths, fallback: 'blocking' }
 }
 
 const CategoryDetail = async ({ params, searchParams }: { params: { slug: string }, searchParams: { page: string } }) => {
