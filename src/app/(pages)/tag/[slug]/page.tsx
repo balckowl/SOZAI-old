@@ -11,7 +11,7 @@ export const generateMetadata = async ({ params }: { params: {slug: string}}) =>
         title: `SOZAI | タグ「${Tags.contents[0]?.name}」`,
         description: 'AIで作ったフリー素材。どんな場面でも合わせやすい素材。PNG、JPG、WEBP、SVG形式でのダウンロードが可能。',
         openGraph: {
-            title: 'SOZAI',
+            title: `SOZAI | タグ「${Tags.contents[0]?.name}」`,
             description: 'AIで作ったフリー素材。どんな場面でも合わせやすい素材。PNG、JPG、WEBP、SVG形式でのダウンロードが可能。',
             url: `${process.env.NEXT_PUBLIC_SITE_URL}/tag/${Tags.contents[0]?.id}`,
             siteName: 'SOZAI',
