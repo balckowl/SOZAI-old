@@ -17,7 +17,7 @@ const SozaiList = (
 
     return (
         <div className="bg-[#eee]">
-            <div className="container mx-auto py-[50px] md:py-[100px] px-[15px] min-h-[700px]">
+            <div className="container mx-auto py-[50px] md:py-[100px] px-[15px]">
                 {!isHome && <div className="mb-[5px]">
                     <Breadcrumb
                         separator={<ChevronRight size={15} />}
@@ -41,7 +41,7 @@ const SozaiList = (
                         <SozaiCard src={sozai.material.url} name={sozai.name} href={sozai.id} id={sozai.id} key={sozai.id}/>
                     ))}
                 </div>
-                {contents?.length == 0 && <div className="flex justify-center items-center h-[300px]">お気に入りのSOZAIはありません。</div>}
+                {contents?.length == 0 && <div className="bg-[#fdf5ef] py-[6px] px-[6px] text-[15px]">このページにSOZAIはありません。</div>}
             </div>
 
             {/* {!isHome && <div className="flex justify-center items-center pb-[100px] gap-3">
