@@ -36,7 +36,7 @@ const SozaiList = (
                     {/* <Tag /> */}
                     <p>{title}</p>
                 </h2>
-                <div className="grid grid-cols-2 lg:grid-cols-3  gap-[10px] md:gap-[100px]">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-[10px] md:gap-[100px]">
                     {contents?.map((sozai: any) => (
                         <SozaiCard src={sozai.material.url} name={sozai.name} href={sozai.id} id={sozai.id} key={sozai.id}/>
                     ))}

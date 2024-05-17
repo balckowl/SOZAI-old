@@ -30,7 +30,7 @@ const SozaiHeader = ({ name, category, tags, id }: { name: string, category: any
                 </Breadcrumb>
             </div>
             <div className="flex items-center justify-between gap-2 mb-[10px]">
-                <h2 className="text-[30px] font-bold">
+                <h2 className="text-[25px] sm:text-[30px] font-bold">
                     {name}
                 </h2>
             </div>

@@ -8,7 +8,7 @@ const Pagination = ({ totalCount, currentPage, limit }: { totalCount: number, cu
 
     const generatePageNumbers = () => {
         const pageNumbers = []
-        const maxPageNumbers = 5 
+        const maxPageNumbers = 5
 
         if (totalPages <= maxPageNumbers) {
             // ページ数が少ない場合はすべて表示
@@ -36,37 +36,57 @@ const Pagination = ({ totalCount, currentPage, limit }: { totalCount: number, cu
     const pageNumbers = generatePageNumbers()
 
     return (
-        <div className="flex justify-center items-center pb-[50px] md:pb-[100px] gap-3 bg-[#eee]">
-            {currentPage > 1 && (
-                <Link href={`?page=${currentPage - 1}`}>
-                    <button className="bg-black text-white w-[40px] h-[40px] md:w-[50px] md:h-[50px] rounded-md flex justify-center items-center gap-2">
-                        <ArrowLeft />
-                    </button>
-                </Link>
-            )}
-            {pageNumbers.map((page, index) =>
-                page === '...' ? (
-                    <span key={index} className="text-black">
-                        ...
-                    </span>
-                ) : (
-                    <Link href={`?page=${page}`} key={index}>
-                        <button
-                            className={`w-[40px] h-[40px] md:w-[50px] md:h-[50px] rounded-md flex justify-center items-center ${page === currentPage ? 'bg-gray-700 text-white' : 'bg-black text-white'
-                                }`}
-                        >
-                            {page}
+        <div>
+            <div className="sm:flex justify-center items-center pb-[50px] md:pb-[100px] gap-3 bg-[#eee] hidden">
+                {currentPage > 1 && (
+                    <Link href={`?page=${currentPage - 1}`}>
+                        <button className="bg-black text-white w-[40px] h-[40px] md:w-[50px] md:h-[50px] rounded-md flex justify-center items-center gap-2">
+                            <ArrowLeft />
                         </button>
                     </Link>
-                )
-            )}
-            {currentPage < totalPages && (
-                <Link href={`?page=${currentPage + 1}`}>
-                    <button className="bg-black text-white w-[40px] h-[40px] md:w-[50px] md:h-[50px] rounded-md flex justify-center items-center gap-2">
-                        <ArrowRight />
-                    </button>
-                </Link>
-            )}
+                )}
+                {pageNumbers.map((page, index) =>
+                    page === '...' ? (
+                        <span key={index} className="text-black">
+                            ...
+                        </span>
+                    ) : (
+                        <Link href={`?page=${page}`} key={index}>
+                            <button
+                                className={`w-[40px] h-[40px] md:w-[50px] md:h-[50px] rounded-md flex justify-center items-center ${page === currentPage ? 'bg-gray-700 text-white' : 'bg-black text-white'
+                                    }`}
+                            >
+                                {page}
+                            </button>
+                        </Link>
+                    )
+                )}
+                {currentPage < totalPages && (
+                    <Link href={`?page=${currentPage + 1}`}>
+                        <button className="bg-black text-white w-[40px] h-[40px] md:w-[50px] md:h-[50px] rounded-md flex justify-center items-center gap-2">
+                            <ArrowRight />
+                        </button>
+                    </Link>
+                )}
+            </div>
+
+            <div className="flex justify-center items-center pb-[100px] gap-5 bg-[#eee] sm:hidden">
+                {currentPage > 1 && (
+                    <Link href={`?page=${currentPage - 1}`}>
+                        <button className="bg-black text-white w-[40px] h-[40px] rounded-md flex justify-center items-center gap-2">
+                            <ArrowLeft size={20}/>
+                        </button>
+                    </Link>
+                )}
+                <div>{currentPage} / {totalPages}</div>
+                {currentPage < totalPages && (
+                    <Link href={`?page=${currentPage + 1}`}>
+                        <button className="bg-black text-white w-[40px] h-[40px] rounded-md flex justify-center items-center gap-2">
+                            <ArrowRight size={20}/>
+                        </button>
+                    </Link>
+                )}
+            </div>
         </div>
     )
 }
