@@ -2,7 +2,6 @@
 
 import { store } from "@/store/store"
 import CategoryList from "../CategoryList/CategoryList"
-import Star from "../Star/Star"
 import TagList from "../TagList/TagList"
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@yamada-ui/react"
 import { ChevronRight } from "lucide-react"
@@ -34,7 +33,6 @@ const SozaiHeader = ({ name, category, tags, id }: { name: string, category: any
                 <h2 className="text-[30px] font-bold">
                     {name}
                 </h2>
-                <Star isLiked={likedIds.includes(id)} id={id} />
             </div>
             <div className="mb-[30px] flex items-center gap-3">
                 <CategoryList contents={category} />

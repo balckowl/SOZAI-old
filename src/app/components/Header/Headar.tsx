@@ -19,11 +19,6 @@ const Headar = () => {
                         </Link>
                     </li>
                     <li>
-                        <Link href="/favorites">
-                            お気に入り
-                        </Link>
-                    </li>
-                    <li>
                         <Link href="/tag/limited-edition">
                             期間限定イラスト
                         </Link>
