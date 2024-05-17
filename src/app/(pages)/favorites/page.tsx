@@ -4,7 +4,6 @@ import { Sozai, getList } from "@/libs/microcms"
 import { store } from "@/store/store";
 import { useEffect, useState } from "react";
 import { useSearchParams } from 'next/navigation'
-import SkeletenSozaiList from "@/app/components/SozaiList/SkeletonSozaiList";
 
 const Favorites = () => {
 
@@ -34,7 +33,6 @@ const Favorites = () => {
     return (
         <div>
             {Sozaies && <SozaiList title="お気に入り" contents={Sozaies.contents} />}
-            {/* <SkeletenSozaiList title="お気に入り" contents={Sozaies.contents}/> */}
         </div>
     )
 }
