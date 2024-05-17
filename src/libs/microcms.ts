@@ -68,20 +68,56 @@ export const getCategoryList = async (queries?: MicroCMSQueries) => {
     return listData;
 };
 
+//カテゴリーを全取得
+export const getAllCategoryList = async () => {
+    let offset = 0;
+    const limit = 10; // or another value based on API constraints
+    let allCategories: Category[] = [];
+    let fetchedData = null;
+
+    do {
+        const queries = { limit, offset };
+        fetchedData = await client.getList<Category>({
+            endpoint: "categories",
+            queries,
+        });
+        allCategories = allCategories.concat(fetchedData.contents);
+        offset += limit; // Update the offset for the next batch
+    } while (fetchedData && allCategories.length < fetchedData.totalCount);
+
+    return allCategories;
+};
+
 //タグ一覧を取得
 export const getTagList = async (queries?: MicroCMSQueries) => {
     const listData = await client.getList<Tag>({
-        // customRequestInit: {
-        //     next: {
-        //         revalidate: 0,
-        //     },
-        // },
         endpoint: "tags",
         queries,
     });
 
     return listData;
 };
+
+//タグを全取得
+export const getAllTagList = async () => {
+    let offset = 0;
+    const limit = 10; // or another value based on API constraints
+    let allTags: Tag[] = [];
+    let fetchedData = null;
+
+    do {
+        const queries = { limit, offset };
+        fetchedData = await client.getList<Tag>({
+            endpoint: "tags",
+            queries,
+        });
+        allTags = allTags.concat(fetchedData.contents);
+        offset += limit; // Update the offset for the next batch
+    } while (fetchedData && allTags.length < fetchedData.totalCount);
+
+    return allTags;
+};
+
 
 // 素材の詳細を取得
 export const getSozaiDetail = async (
