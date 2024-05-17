@@ -15,8 +15,6 @@ const SozaiList = (
         { src: "/images/free/bird.png", name: "小鳥", href: "/sozai/121" },
     ]
 
-    console.log(contents)
-
     return (
         <div className="bg-[#eee]">
             <div className="container mx-auto py-[50px] md:py-[100px] px-[15px] min-h-[700px]">

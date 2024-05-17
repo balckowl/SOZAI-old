@@ -4,6 +4,32 @@ import SozaiHeader from "@/app/components/SozaiHeader/SozaiHeader"
 import { getSozaiDetail } from "@/libs/microcms"
 import Image from "next/image"
 
+export const generateMetadata = async ({ params }: { params: {slug: string}}) => {
+
+    const { slug } = params
+    const SozaiDetail = await getSozaiDetail(slug)
+
+    return {
+        title: `SOZAI | ${SozaiDetail.name}`,
+        description: 'AIで作ったフリー素材。どんな場面でも合わせやすい素材。PNG、JPG、WEBP、SVG形式でのダウンロードが可能。',
+        openGraph: {
+            title: 'SOZAI',
+            description: 'AIで作ったフリー素材。どんな場面でも合わせやすい素材。PNG、JPG、WEBP、SVG形式でのダウンロードが可能。',
+            url: `${process.env.NEXT_PUBLIC_SITE_URL}/sozai/${SozaiDetail.id}`,
+            siteName: 'SOZAI',
+            images: [
+                {
+                    width: '700',
+                    height: '700',
+                    url: `${SozaiDetail.material.url}`
+                }
+            ],
+            locale: 'jp',
+            type: 'article',
+        }
+    }
+}
+
 const SozaiDetail = async ({ params }: { params: { slug: string } }) => {
 
     const { slug } = params

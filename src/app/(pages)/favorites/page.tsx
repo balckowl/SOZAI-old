@@ -5,6 +5,8 @@
 // import { store } from "@/store/store";
 // import { useSearchParams } from 'next/navigation';
 
+import { Construction } from "lucide-react"
+
 // const Favorites = () => {
 //     const [Sozaies, setSozaies] = useState<any>({});
 //     const { likedIds } = store();
@@ -43,10 +45,14 @@
 
 // export default Favorites;
 
-const page = () => {
-  return (
-    <div>page</div>
-  )
+const Favorites = () => {
+    return (
+        <div className="w-full min-h-[500px] bg-[#eee] flex items-center justify-center gap-3 text-[20px]">
+            <Construction />
+            <p>開発中</p>
+            <Construction />
+        </div>
+    )
 }
 
-export default page
+export default Favorites
