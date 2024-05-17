@@ -24,8 +24,8 @@ const Headar = () => {
                         </Link>
                     </li>
                     <li>
-                        <Link href="/tag/original">
-                            オリジナル素材
+                        <Link href="/tag/limited-edition">
+                            期間限定イラスト
                         </Link>
                     </li>
                 </ul>

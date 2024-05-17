@@ -1,11 +1,11 @@
-import { ArrowLeft, ArrowRight, Tag } from "lucide-react"
+"use client"
+import { ChevronRight } from "lucide-react"
 import SozaiCard from "../SozaiCard/SozaiCard"
-import Link from "next/link"
-import Pagination from "../Pagination/Pagination"
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, Loading } from "@yamada-ui/react"
 
 const SozaiList = (
-    { title, contents, isHome = false, currentPage, totalCount, limit }:
-        { title: string, contents: any, isHome?: boolean, currentPage: number, totalCount: number, limit: number }
+    { title, contents, isHome = false }:
+        { title: string, contents: any, isHome?: boolean }
 ) => {
 
     const Sozaies = [
@@ -15,29 +15,35 @@ const SozaiList = (
         { src: "/images/free/bird.png", name: "小鳥", href: "/sozai/121" },
     ]
 
+    console.log(contents)
+
     return (
         <div className="bg-[#eee]">
-            <div className="container mx-auto py-[50px] md:py-[100px] px-[15px]">
-                <h2 className="font-bold text-[20px] md:text-[25px] mb-[10px] flex items-center gap-2">
-                    <Tag />
+            <div className="container mx-auto py-[50px] md:py-[100px] px-[15px] min-h-[700px]">
+                {!isHome && <div className="mb-[5px]">
+                    <Breadcrumb
+                        separator={<ChevronRight size={15} />}
+                        gap={"sm"}
+                        className="text-[12px]"
+                    >
+                        <BreadcrumbItem>
+                            <BreadcrumbLink href="/">ホーム</BreadcrumbLink>
+                        </BreadcrumbItem>
+                        <BreadcrumbItem isCurrentPage={true}>
+                            <BreadcrumbLink href="/">{title}</BreadcrumbLink>
+                        </BreadcrumbItem>
+                    </Breadcrumb>
+                </div>}
+                <h2 className="font-bold text-[20px] md:text-[30px] mb-[20px] flex items-center gap-2">
+                    {/* <Tag /> */}
                     <p>{title}</p>
                 </h2>
                 <div className="grid grid-cols-2 lg:grid-cols-3  gap-[10px] md:gap-[100px]">
-                    {contents.map((sozai: any) => (
-                        <SozaiCard src={sozai.material.url} name={sozai.name} href={sozai.id} />
+                    {contents?.map((sozai: any) => (
+                        <SozaiCard src={sozai.material.url} name={sozai.name} href={sozai.id} id={sozai.id} />
                     ))}
                 </div>
-            </div>
-
-            <div className="container mx-auto px-[15px]">
-                {isHome && <div className="flex justify-center pb-[100px]">
-                    <Link href="/all-sozai">
-                        <button className="bg-black text-white py-[20px] px-[60px] rounded-md flex items-center gap-2">
-                            <p className="text-[13px]">すべてのイラストを見る</p>
-                            <ArrowRight width={18} height={18} />
-                        </button>
-                    </Link>
-                </div>}
+                {contents?.length == 0 && <div className="flex justify-center items-center h-[300px]">お気に入りのSOZAIはありません。</div>}
             </div>
 
             {/* {!isHome && <div className="flex justify-center items-center pb-[100px] gap-3">
@@ -57,8 +63,6 @@ const SozaiList = (
                     </Link>
                 )}
             </div>} */}
-
-            {!isHome && <Pagination totalCount={totalCount} currentPage={currentPage} limit={limit} />}
         </div>
     )
 }

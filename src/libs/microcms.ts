@@ -29,25 +29,27 @@ export type Category = {
     engname: string;
 } & MicroCMSDate;
 
-if (!process.env.MICROCMS_SERVICE_DOMAIN) {
+if (!process.env.NEXT_PUBLIC_MICROCMS_SERVICE_DOMAIN) {
     throw new Error("MICROCMS_SERVICE_DOMAIN is required");
 }
 
-if (!process.env.MICROCMS_API_KEY) {
+if (!process.env.NEXT_PUBLIC_MICROCMS_API_KEY) {
     throw new Error("MICROCMS_API_KEY is required");
 }
 
 // API取得用のクライアントを作成
 export const client = createClient({
-    serviceDomain: process.env.MICROCMS_SERVICE_DOMAIN,
-    apiKey: process.env.MICROCMS_API_KEY,
+    serviceDomain: process.env.NEXT_PUBLIC_MICROCMS_SERVICE_DOMAIN,
+    apiKey: process.env.NEXT_PUBLIC_MICROCMS_API_KEY,
 });
 
 // 素材一覧を取得
 export const getList = async (queries?: MicroCMSQueries) => {
     const listData = await client.getList<Sozai>({
         customRequestInit: {
-            cache: "no-store"
+            next: {
+                revalidate: 0,
+            },
         },
         endpoint: "materials",
         queries,
@@ -59,12 +61,12 @@ export const getList = async (queries?: MicroCMSQueries) => {
 //カテゴリ一覧を取得
 export const getCategoryList = async (queries?: MicroCMSQueries) => {
     const listData = await client.getList<Category>({
-        endpoint: "categories",
         customRequestInit: {
             next: {
                 revalidate: 0,
             },
         },
+        endpoint: "categories",
         queries,
     });
 
@@ -74,12 +76,12 @@ export const getCategoryList = async (queries?: MicroCMSQueries) => {
 //タグ一覧を取得
 export const getTagList = async (queries?: MicroCMSQueries) => {
     const listData = await client.getList<Tag>({
-        endpoint: "tags",
         customRequestInit: {
             next: {
                 revalidate: 0,
             },
         },
+        endpoint: "tags",
         queries,
     });
 
@@ -92,6 +94,11 @@ export const getSozaiDetail = async (
     queries?: MicroCMSQueries
 ) => {
     const detailData = await client.getListDetail<Sozai>({
+        customRequestInit: {
+            next: {
+                revalidate: 0,
+            },
+        },
         endpoint: "materials",
         contentId,
         queries,

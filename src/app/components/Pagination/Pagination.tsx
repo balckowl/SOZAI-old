@@ -1,3 +1,4 @@
+"use client"
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import Link from "next/link";
 
@@ -35,7 +36,7 @@ const Pagination = ({ totalCount, currentPage, limit }: { totalCount: number, cu
     const pageNumbers = generatePageNumbers()
 
     return (
-        <div className="flex justify-center items-center pb-[50px] md:pb-[100px] gap-3">
+        <div className="flex justify-center items-center pb-[50px] md:pb-[100px] gap-3 bg-[#eee]">
             {currentPage > 1 && (
                 <Link href={`?page=${currentPage - 1}`}>
                     <button className="bg-black text-white w-[40px] h-[40px] md:w-[50px] md:h-[50px] rounded-md flex justify-center items-center gap-2">
