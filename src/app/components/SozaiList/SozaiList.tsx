@@ -40,7 +40,7 @@ const SozaiList = (
                 </h2>
                 <div className="grid grid-cols-2 lg:grid-cols-3  gap-[10px] md:gap-[100px]">
                     {contents?.map((sozai: any) => (
-                        <SozaiCard src={sozai.material.url} name={sozai.name} href={sozai.id} id={sozai.id} />
+                        <SozaiCard src={sozai.material.url} name={sozai.name} href={sozai.id} id={sozai.id} key={sozai.id}/>
                     ))}
                 </div>
                 {contents?.length == 0 && <div className="flex justify-center items-center h-[300px]">お気に入りのSOZAIはありません。</div>}
