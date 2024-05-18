@@ -1,15 +1,6 @@
-"use client"
-
 import { saveAs } from 'file-saver';
 
 const DownloadBtn = ({ url, name }: { url: string, name: string }) => {
-
-    const mimeTypes: { [key: string]: string } = {
-        'png': 'image/png',
-        'jpg': 'image/jpeg',
-        'webp': 'image/webp',
-        'svg': 'image/svg+xml'
-    };
 
     const downloadImage = (format: string) => {
         fetch(url)
@@ -19,18 +10,11 @@ const DownloadBtn = ({ url, name }: { url: string, name: string }) => {
                 const isIOS = /iP(hone|(o|a)d)/.test(navigator.userAgent);
 
                 if (isIOS) {
-                    // iOSデバイスの場合
-                    const blobWithMime = new Blob([blob], { type: mimeTypes[format] || 'application/octet-stream' });
-                    const a = document.createElement('a');
-                    a.href = URL.createObjectURL(blobWithMime);
-                    a.target = '_blank'
-                    a.download = filename;
-                    a.rel = 'noopener noreferrer';
-                    document.body.appendChild(a);
-                    a.click();
-                    document.body.removeChild(a);
+                    // iOSデバイスの場合、新しいタブでBlob URLを開く
+                    const blobUrl = URL.createObjectURL(blob);
+                    window.open(blobUrl, '_blank', 'noopener,noreferrer');
                 } else {
-                    // その他のデバイス
+                    // その他のデバイスではfile-saverを使用してダウンロード
                     saveAs(blob, filename);
                 }
             })
@@ -50,4 +34,4 @@ const DownloadBtn = ({ url, name }: { url: string, name: string }) => {
     )
 }
 
-export default DownloadBtn
+export default DownloadBtn;
