@@ -31,26 +31,26 @@ export const generateMetadata = async ({ params }: { params: { slug: string } })
 }
 
 //ssgの設定
-// export const dynamicParams = false
+export const dynamicParams = false
 
-// export async function generateStaticParams() {
+export async function generateStaticParams() {
 
-//     let offset = 0;
-//     const limit = 10;
-//     let allSozaies: Sozai[] = []
-//     let totalCount = 0;
+    let offset = 0;
+    const limit = 10;
+    let allSozaies: Sozai[] = []
+    let totalCount = 0;
 
-//     do {
-//         const response = await getList({ limit: limit, offset: offset });
-//         allSozaies = allSozaies.concat(response.contents)
-//         totalCount = response.totalCount;
-//         offset += limit;
-//     } while (allSozaies.length < totalCount)
+    do {
+        const response = await getList({ limit: limit, offset: offset });
+        allSozaies = allSozaies.concat(response.contents)
+        totalCount = response.totalCount;
+        offset += limit;
+    } while (allSozaies.length < totalCount)
 
-//     return allSozaies.map(sozai => ({
-//         slug: sozai.id
-//     }))
-// }
+    return allSozaies.map(sozai => ({
+        slug: sozai.id
+    }))
+}
 
 const SozaiDetail = async ({ params }: { params: { slug: string } }) => {
 
