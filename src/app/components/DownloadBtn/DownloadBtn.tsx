@@ -3,13 +3,41 @@ import { saveAs } from 'file-saver';
 
 const DownloadBtn = ({ url, name }: { url: string, name: string }) => {
 
-    const downloadImage = (format: any) => {
+    // const downloadImage = (format: any) => {
 
+    //     fetch(url)
+    //         .then(response => response.blob())
+    //         .then(blob => {
+    //             const filename = `${name}.${format}`;
+    //             saveAs(blob, filename);
+    //         })
+    //         .catch(e => console.error("Error downloading the image:", e));
+    // }
+
+    const downloadImage = (format: string) => {
         fetch(url)
             .then(response => response.blob())
             .then(blob => {
                 const filename = `${name}.${format}`;
-                saveAs(blob, filename);
+                let mimeType = '';
+                switch (format) {
+                    case 'png':
+                        mimeType = 'image/png';
+                        break;
+                    case 'jpg':
+                        mimeType = 'image/jpeg';
+                        break;
+                    case 'webp':
+                        mimeType = 'image/webp';
+                        break;
+                    case 'svg':
+                        mimeType = 'image/svg+xml';
+                        break;
+                    default:
+                        mimeType = 'application/octet-stream';
+                }
+                const newBlob = new Blob([blob], { type: mimeType });
+                saveAs(newBlob, filename);
             })
             .catch(e => console.error("Error downloading the image:", e));
     }
