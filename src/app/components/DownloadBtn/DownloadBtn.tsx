@@ -8,17 +8,19 @@ const DownloadBtn = ({ url, name }: { url: string, name: string }) => {
         fetch(url)
             .then(response => response.blob())
             .then(blob => {
-                const filename = `${name}.${format}`;
-                const isIOS = /iP(hone|(o|a)d)/.test(navigator.userAgent);
+                // const filename = `${name}.${format}`;
+                // const isIOS = /iP(hone|(o|a)d)/.test(navigator.userAgent);
 
-                if (isIOS) {
-                    // iOSデバイスの場合、新しいタブでBlob URLを開く
-                    const blobUrl = URL.createObjectURL(blob);
-                    window.open(blobUrl, '_blank', 'noopener,noreferrer');
-                } else {
-                    // その他のデバイスではfile-saverを使用してダウンロード
-                    saveAs(blob, filename);
-                }
+                // if (isIOS) {
+                //     // // iOSデバイスの場合、新しいタブでBlob URLを開く
+                const blobUrl = URL.createObjectURL(blob);
+                window.open(blobUrl, '_blank', 'noopener,noreferrer');
+
+                //     console.log('Yes')
+                // } else {
+                //     // その他のデバイスではfile-saverを使用してダウンロード
+                //     saveAs(blob, filename);
+                // }
             })
             .catch(e => console.error("Error downloading the image:", e));
     }
