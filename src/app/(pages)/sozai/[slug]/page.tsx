@@ -66,6 +66,7 @@ const SozaiDetail = async ({ params }: { params: { slug: string } }) => {
     ]
 
     const SozaiDetail = await getSozaiDetail(slug)
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent)
 
     return (
         <div>
@@ -79,7 +80,7 @@ const SozaiDetail = async ({ params }: { params: { slug: string } }) => {
                     <div className="col-span-1 row-span-3 bg-[#eee] flex justify-center items-center h-[300px] lg:h-full">
                         <p className="xl:text-[50px]">Adsense</p>
                     </div>
-                    <DownloadBtn url={SozaiDetail.material.url} name={SozaiDetail.name} />
+                    {!isIOS && <DownloadBtn url={SozaiDetail.material.url} name={SozaiDetail.name} />}
                 </div>
             </div>
         </div>

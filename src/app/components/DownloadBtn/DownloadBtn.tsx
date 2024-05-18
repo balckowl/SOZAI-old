@@ -4,38 +4,14 @@ import { saveAs } from 'file-saver';
 
 const DownloadBtn = ({ url, name }: { url: string, name: string }) => {
 
-    const mimeTypes: { [key: string]: string } = {
-        'png': 'image/png',
-        'jpg': 'image/jpeg',
-        'webp': 'image/webp',
-        'svg': 'image/svg+xml'
-    };
-
     const downloadImage = (format: string) => {
-        fetch(url)
+        fetch('/path/to/your/image.' + format)
             .then(response => response.blob())
             .then(blob => {
-                const filename = `${name}.${format}`;
-                const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-
-                // if (isIOS) {
-                    // iOSデバイスの場合
-                const blobWithMime = new Blob([blob], { type: mimeTypes[format] || 'application/octet-stream' });
-                const a = document.createElement('a');
-                a.href = URL.createObjectURL(blobWithMime);
-                
-                a.download = filename;
-                a.rel = 'noopener noreferrer';
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                // } else {
-                //     // その他のデバイス
-                //     saveAs(blob, filename);
-                // }
+                saveAs(blob, 'downloaded-image.' + format);
             })
             .catch(e => console.error("Error downloading the image:", e));
-    }
+    };
 
     return (
         <div className="col-span-1 row-span-1 flex items-center justify-center gap-3 flex-wrap">
