@@ -78,7 +78,7 @@ const Pagination = ({ totalCount, currentPage, limit }: { totalCount: number, cu
                         </button>
                     </Link>
                 )}
-                <div>{currentPage} / {totalPages}</div>
+                {currentPage > 1 && (<div>{currentPage} / {totalPages}</div>)}
                 {currentPage < totalPages && (
                     <Link href={`?page=${currentPage + 1}`}>
                         <button className="bg-black text-white w-[40px] h-[40px] rounded-md flex justify-center items-center gap-2">

@@ -53,6 +53,26 @@ export const getList = async (queries?: MicroCMSQueries) => {
     return listData;
 };
 
+//全ての素材を取得
+export const getAllList = async () => {
+    let offset = 0;
+    const limit = 10; // Adjust the limit as needed
+    let allMaterials: Sozai[] = [];
+    let fetchedData = null;
+
+    do {
+        const queries = { limit, offset };
+        fetchedData = await client.getList<Sozai>({
+            endpoint: "materials",
+            queries,
+        });
+        allMaterials = allMaterials.concat(fetchedData.contents);
+        offset += limit; // Update the offset to fetch the next batch
+    } while (fetchedData && allMaterials.length < fetchedData.totalCount);
+
+    return allMaterials;
+};
+
 //カテゴリ一覧を取得
 export const getCategoryList = async (queries?: MicroCMSQueries) => {
     const listData = await client.getList<Category>({
