@@ -3,15 +3,27 @@ import { saveAs } from 'file-saver';
 
 const DownloadBtn = ({ url, name }: { url: string, name: string }) => {
 
-    const downloadImage = (format: any) => {
-
+    const downloadImage = (format: string) => {
         fetch(url)
             .then(response => response.blob())
             .then(blob => {
                 const filename = `${name}.${format}`;
-                saveAs(blob, filename);
-            })
-            .catch(e => console.error("Error downloading the image:", e));
+                const isIOS = /iP(hone|(o|a)d)/.test(navigator.userAgent);
+
+                if (isIOS) {
+                    const a = document.createElement('a');
+                    a.href = URL.createObjectURL(blob);
+                    const evt = new MouseEvent('click', {
+                        view: window,
+                        bubbles: true,
+                        cancelable: true
+                    });
+                    a.dispatchEvent(evt);
+                } else {
+                    saveAs(blob, filename);
+                }
+                
+            }).catch(e => console.error("Error downloading the image:", e))
     }
 
     return (
