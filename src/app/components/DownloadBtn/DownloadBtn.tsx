@@ -4,21 +4,33 @@ import { saveAs } from 'file-saver';
 
 const DownloadBtn = ({ url, name }: { url: string, name: string }) => {
 
+    const mimeTypes: { [key: string]: string } = {
+        'png': 'image/png',
+        'jpg': 'image/jpeg',
+        'webp': 'image/webp',
+        'svg': 'image/svg+xml'
+    };
+
     const downloadImage = (format: string) => {
         fetch(url)
             .then(response => response.blob())
             .then(blob => {
-                // const filename = `${name}.${format}`;
-                // const isIOS = /iP(hone|(o|a)d)/.test(navigator.userAgent);
+                const filename = `${name}.${format}`;
+                const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
 
                 // if (isIOS) {
-                //     // // iOSデバイスの場合、新しいタブでBlob URLを開く
-                const blobUrl = URL.createObjectURL(blob);
-                window.open(blobUrl, '_blank', 'noopener,noreferrer');
-
-                //     console.log('Yes')
+                    // iOSデバイスの場合
+                const blobWithMime = new Blob([blob], { type: mimeTypes[format] || 'application/octet-stream' });
+                const a = document.createElement('a');
+                a.href = URL.createObjectURL(blobWithMime);
+                
+                a.download = filename;
+                a.rel = 'noopener noreferrer';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
                 // } else {
-                //     // その他のデバイスではfile-saverを使用してダウンロード
+                //     // その他のデバイス
                 //     saveAs(blob, filename);
                 // }
             })
@@ -38,4 +50,4 @@ const DownloadBtn = ({ url, name }: { url: string, name: string }) => {
     )
 }
 
-export default DownloadBtn;
+export default DownloadBtn
