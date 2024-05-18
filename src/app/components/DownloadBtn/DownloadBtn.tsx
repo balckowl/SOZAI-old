@@ -23,6 +23,7 @@ const DownloadBtn = ({ url, name }: { url: string, name: string }) => {
                     const blobWithMime = new Blob([blob], { type: mimeTypes[format] || 'application/octet-stream' });
                     const a = document.createElement('a');
                     a.href = URL.createObjectURL(blobWithMime);
+                    a.target = '_blank'
                     a.download = filename;
                     a.rel = 'noopener noreferrer';
                     document.body.appendChild(a);
