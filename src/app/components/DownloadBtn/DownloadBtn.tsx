@@ -25,7 +25,7 @@ const DownloadBtn = ({ url, name }: { url: string, name: string }) => {
                         mimeType = 'application/octet-stream';
                 }
                 const newBlob = new Blob([blob], { type: mimeType });
-                saveAs(newBlob, filename);
+                saveAs(newBlob);
             })
             .catch(e => console.error("Error downloading the image:", e));
     }
