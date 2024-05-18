@@ -1,3 +1,5 @@
+"use client"
+
 import { saveAs } from 'file-saver';
 
 const DownloadBtn = ({ url, name }: { url: string, name: string }) => {
