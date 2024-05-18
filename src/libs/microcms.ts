@@ -145,11 +145,11 @@ export const getSozaiDetail = async (
     queries?: MicroCMSQueries
 ) => {
     const detailData = await client.getListDetail<Sozai>({
-        // customRequestInit: {
-        //     next: {
-        //         revalidate: 0,
-        //     },
-        // },
+        customRequestInit: {
+            next: {
+                revalidate: 0,
+            },
+        },
         endpoint: "materials",
         contentId,
         queries,
