@@ -18,7 +18,7 @@ const DownloadBtn = ({ url, name }: { url: string, name: string }) => {
         fetch(url)
             .then(response => response.blob())
             .then(blob => {
-                const filename = `${name}.${format}`;
+                // const filename = `${name}.${format}`;
                 let mimeType = '';
                 switch (format) {
                     case 'png':
@@ -37,7 +37,7 @@ const DownloadBtn = ({ url, name }: { url: string, name: string }) => {
                         mimeType = 'application/octet-stream';
                 }
                 const newBlob = new Blob([blob], { type: mimeType });
-                saveAs(newBlob, filename);
+                saveAs(newBlob);
             })
             .catch(e => console.error("Error downloading the image:", e));
     }
